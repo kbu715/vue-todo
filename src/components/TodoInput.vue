@@ -15,9 +15,15 @@ export default {
   },
   methods: {
     addTodo: function() {
-      // 저장하는 로직
-      localStorage.setItem(this.newTodoItem, this.newTodoItem);
-      this.clearInput();
+      if (this.newTodoItem !== '') {
+            // 저장하는 로직
+            const obj = {
+              completed: false,
+              item: this.newTodoItem
+            }
+            localStorage.setItem(this.newTodoItem, JSON.stringify(obj));
+            this.clearInput();
+      }
     },
     clearInput: function() {
       this.newTodoItem = '';
