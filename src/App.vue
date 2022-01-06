@@ -1,7 +1,9 @@
 <template>
   <div id="app">
     <TodoHeader></TodoHeader>
-    <TodoInput></TodoInput>
+    <!-- v-on: 하위 컴포넌트에서 발생시킨 이벤트 이름 = "현재 컴포넌트의 메서드 명" -->
+    <TodoInput v-on:addTodoItem="addOneItem"></TodoInput>
+    <!-- v-bind:내려보낼 프롭스 속성 이름 = "현재 위치의 컴포넌트 데이터 속성" -->
     <TodoList v-bind:propsdata="todoItems"></TodoList>
     <TodoFooter></TodoFooter>
   </div>
@@ -17,6 +19,17 @@ export default {
   data: function() {
     return {
       todoItems: []
+    }
+  },
+  methods: {
+    addOneItem: function(todoItem) {
+            // 저장하는 로직
+            const obj = {
+              completed: false,
+              item: todoItem
+            }
+            localStorage.setItem(todoItem, JSON.stringify(obj));
+            this.todoItems.push(obj);
     }
   },
   created: function() {
