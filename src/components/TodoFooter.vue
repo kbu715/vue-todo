@@ -7,24 +7,24 @@
 export default {
   methods: {
     clearTodo() {
-      this.$emit('clearAll');
-    }
-  }
+      this.$store.commit("clearAllItems")
+    },
+  },
 }
 </script>
 <style scoped>
-  .clearAllContainer {
-    width: 8.5rem;
-    height: 50px;
-    line-height: 50px;
-    background-color: #fff;
-    border-radius: 5px;
-    margin: 0 auto;
-    cursor: pointer;
-  }
+.clearAllContainer {
+  width: 8.5rem;
+  height: 50px;
+  line-height: 50px;
+  background-color: #fff;
+  border-radius: 5px;
+  margin: 0 auto;
+  cursor: pointer;
+}
 
-  .clearAllBtn {
-    color: #e20303;
-    display: block;
-  }
+.clearAllBtn {
+  color: #e20303;
+  display: block;
+}
 </style>
