@@ -27,7 +27,6 @@
 export default {
   methods: {
     removeTodo(todoItem, index) {
-      // this.$emit("removeItem", todoItem, index)
       this.$store.commit("removeOneItem", { todoItem, index })
     },
     toggleComplete(todoItem, index) {
