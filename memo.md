@@ -50,3 +50,49 @@ getters: {
   <p>{{ this.$store.getters.getNumber }}</p>
   <p>{{ this.$store.getters.doubleNumber }}</p>
 ```
+
+### mutations란?
+
+- state의 값을 변경할 수 있는 **유일한 방법**이자 메서드
+- 뮤테이션은 commit() 으로 동작시킨다.
+
+- state를 변경하기 위해 mutations를 동작시킬 때 인자(payload)를 전달할 수 있다.
+
+```javascript
+// store.js
+state: {
+  num: 10
+},
+mutations: {
+  printNumbers(state) {
+    return state.num;
+  },
+  sumNumbers(state, anotherNum) {
+    return state.num + anotherNum;
+  },
+
+  //
+  //
+  //
+
+  modifyState(state, payload) {
+    console.log(payload.str);
+    return state.num += payload.num;
+  }
+
+}
+
+
+// App.vue
+this.$store.commit('printNumbers'); // 10
+this.$store.commit('sumNumbers', 20); // 30
+
+//
+//
+//
+
+this.$store.commit('modifyState', {
+  str: 'passed from payload',
+  num: 20
+})
+```
