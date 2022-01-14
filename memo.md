@@ -111,3 +111,80 @@ methods: {
 
 - 특정 시점에 어떤 컴포넌트가 state를 접근하여 변경한 건지 확인하기 어렵기 때문
 - 따라서, 뷰의 반응성을 거스르지 않게 명시적으로 상태변화를 수행. **반응성, 디버깅, 테스팅혜택**
+
+### actions란?
+
+- 비동기 처리 로직을 선언하는 메서드. 비동기 로직을 담당하는 mutations
+- 데이터 요청, **Promise**, ES6 async과 같은 **비동기 처리**는 모두 actions에 선언
+
+```javascript
+// store.js
+state: {
+  num: 10
+},
+mutations: {
+  doubleNumber(state) {
+    state.num * 2;
+  }
+},
+actions: {
+  delayDoubleNumber(context) { // context로 store의 메서드와 속성 접근
+    context.commit('doubleNumber');
+  }
+}
+
+// App.vue
+this.$store.dispatch('delayDoubleNumber');
+```
+
+#### actions 비동기 코드 예제 1
+
+```javascript
+// store.js
+mutations: {
+  addCounter(state) {
+    state.number++
+  },
+},
+actions: {
+  delayedAddCounter(context) {
+    setTimeout(() => context.commit('addCounter'), 2000); // 2초후 증가
+  }
+}
+
+// App.vue
+methods: {
+  incrementCounter() {
+    this.$store.dispatch('delayedAddCounter');
+  }
+}
+```
+
+#### actions 비동기 코드 예제 2
+
+```javascript
+// store.js
+mutations: {
+  setData(state, fetchedData) {
+      state.product = fetchedData;
+  }
+},
+actions: {
+  fetchProductData(context) {
+    return axios.get('https://domain.com/products/1')
+                .then(response => context.commit('setData', response));
+  }
+}
+
+// App.vue
+methods: {
+  getProduct() {
+    this.$store.dispatch('fetchProductData');
+  }
+}
+```
+
+### 왜 비동기 처리 로직은 actions에 선언해야 할까?
+
+- 여러개의 컴포넌트에서 mutations로 시간 차를 두고 state를 변경하는 경우
+  - 결론 : state 값의 변화를 추적하기 어렵기 때문에 mutations 속성에는 동기 처리 로직만 넣어야 한다!!!
