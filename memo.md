@@ -204,7 +204,7 @@ Store에 있는 아래 4가지 속성들을 간편하게 코딩하는 방법
 
 // ...
 
-export default { // store의 'num'을 this.num 으로 사용가능해진다
+export default { // store의 'num'을 this.num 으로 사용가능해진다 (vue에서 권고함!)
   computed() { ...mapState(['num']), mapGetters(['countedNum']) },
   methods: { ...mapMutations(['clickBtn']), mapActions(['asyncClickBtn']) }
 }
