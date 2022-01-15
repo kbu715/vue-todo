@@ -188,3 +188,77 @@ methods: {
 
 - 여러개의 컴포넌트에서 mutations로 시간 차를 두고 state를 변경하는 경우
   - 결론 : state 값의 변화를 추적하기 어렵기 때문에 mutations 속성에는 동기 처리 로직만 넣어야 한다!!!
+
+
+### 각 속성들을 더 쉽게 사용하는 방법 - Helper
+
+Store에 있는 아래 4가지 속성들을 간편하게 코딩하는 방법
+
+- state > mapState
+- getters > mapGetters
+- mutations > mapMutations
+- actions > mapActions
+
+
+```javascript
+
+// ...
+
+export default { // store의 'num'을 this.num 으로 사용가능해진다
+  computed() { ...mapState(['num']), mapGetters(['countedNum']) },
+  methods: { ...mapMutations(['clickBtn']), mapActions(['asyncClickBtn']) }
+}
+
+```
+
+### mapState
+
+- Vuex에 선언한 state 속성을 뷰 컴포넌트에 더 쉽게 연결해주는 헬퍼
+
+```javascript
+// App.vue
+
+import { mapState } from 'vuex
+
+computed() {
+    ...mapState(['num'])
+    // num() { return this.$store.state.num; }
+}
+
+// store.js
+state: {
+  num: 10
+}
+```
+
+```javascript
+  // <p>{{ this.$store.state.num }}</p>
+  <p>{{ this.num }}</p>
+```
+
+
+### mapGetters
+
+- Vuex에 선언한 getters 속성을 뷰 컴포넌트에 더 쉽게 연결해주는 헬퍼
+
+```javascript
+// App.vue
+
+import { mapGetters } from 'vuex
+
+computed() {
+    ...mapGetters(['reverseMessage'])
+}
+
+// store.js
+getters: {
+  reverseMessage(state) {
+    return state.msg.split('').reverse().join('');
+  }
+}
+```
+
+```javascript
+  // <p>{{ this.$store.getters.reverseMessage }}</p>
+  <p>{{ this.reverseMessage }}</p>
+```
