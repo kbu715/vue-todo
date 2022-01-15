@@ -10,13 +10,13 @@
           <i
             class="checkBtn fas fa-check"
             v-bind:class="{ checkBtnCompleted: todoItem.completed }"
-            v-on:click="toggleComplete(todoItem, index)"
+            v-on:click="toggleComplete({todoItem, index})"
           ></i>
           <span v-bind:class="{ textCompleted: todoItem.completed }">{{
             todoItem.item
           }}</span>
         </div>
-        <span class="removeBtn" v-on:click="removeTodo(todoItem, index)">
+        <span class="removeBtn" v-on:click="removeTodo({todoItem, index})">
           <i class="fas fa-trash-alt"></i>
         </span>
       </li>
@@ -24,16 +24,22 @@
   </div>
 </template>
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapMutations } from 'vuex'
 
 export default {
   methods: {
-    removeTodo(todoItem, index) {
-      this.$store.commit("removeOneItem", { todoItem, index })
-    },
-    toggleComplete(todoItem, index) {
-      this.$store.commit("toggleOneItem", { todoItem, index })
-    },
+    // 암묵적으로 인자를 넘긴다.
+    ...mapMutations({
+      removeTodo: 'removeOneItem',
+      toggleComplete: 'toggleOneItem'
+    })
+
+    // removeTodo(todoItem, index) {
+    //   this.$store.commit("removeOneItem", { todoItem, index })
+    // },
+    // toggleComplete(todoItem, index) {
+    //   this.$store.commit("toggleOneItem", { todoItem, index })
+    // },
   },
   computed: {
     // todoItems() {
