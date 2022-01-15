@@ -218,7 +218,7 @@ export default { // store의 'num'을 this.num 으로 사용가능해진다 (vue
 ```javascript
 // App.vue
 
-import { mapState } from 'vuex
+import { mapState } from 'vuex'
 
 computed() {
     ...mapState(['num'])
@@ -244,7 +244,7 @@ state: {
 ```javascript
 // App.vue
 
-import { mapGetters } from 'vuex
+import { mapGetters } from 'vuex'
 
 computed() {
     ...mapGetters(['reverseMessage'])
@@ -261,4 +261,78 @@ getters: {
 ```javascript
   // <p>{{ this.$store.getters.reverseMessage }}</p>
   <p>{{ this.reverseMessage }}</p>
+```
+
+
+### mapMutations
+
+- Vuex에 선언한 mutations 속성을 뷰 컴포넌트에 더 쉽게 연결해주는 헬퍼
+
+```javascript
+// App.vue
+import { mapMutations } from 'vuex'
+
+methods: {
+  ...mapMutations(['clickBtn']),
+  authLogin() {},
+  displayTable() {}
+}
+
+
+// store.js
+mutations: {
+  clickBtn(state) {
+    alert(state.msg);
+  }
+}
+```
+
+```html
+<button @click="clickBtn">popup message</button>
+```
+
+### mapActions
+
+- Vuex에 선언한 actions 속성을 뷰 컴포넌트에 더 쉽게 연결해주는 헬퍼
+
+```javascript
+// App.vue
+import { mapActions } from 'vuex'
+
+methods: {
+  ...mapActions(['delayClickBtn']),
+}
+
+
+// store.js
+mutations: {
+  delayClickBtn(context) {
+    setTimeout(() => context.commit('clickBtn'), 2000);
+  }
+}
+```
+
+```html
+<button @click="delayClickBtn">delay popup message</button>
+```
+
+### 헬퍼의 유연한 문법
+
+- Vuex에 선언한 속성을 그대로 컴포넌트에 연결하는 문법
+
+```javascript
+// 배열 리터럴
+...mapMutations([
+  'clickBtn', // 'clickBtn': clickBtn
+  'addNumber' // addNumber(인자) // 인자를 표현을 안해도 알아서 넘겨준다!
+])
+```
+
+- Vuex에 선언한 속성을 컴포넌트의 특정 메서드에다가 연결하는 문법
+
+```javascript
+// 객체 리터럴
+...mapMutations({
+  popupMsg: 'clickBtn' // 컴포넌트 메서드 명 : Store의 뮤테이션 명
+})
 ```
