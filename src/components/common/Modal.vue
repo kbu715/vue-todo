@@ -19,6 +19,13 @@
               default body
             </slot>
           </div>
+          <div class="modal-footer">
+
+
+            <slot name="footer">
+              default footer
+            </slot>
+          </div>
           
         </div>
       </div>
@@ -45,7 +52,7 @@
 }
 
 .modal-container {
-  width: 300px;
+  width: 500px;
   margin: 0px auto;
   padding: 20px 30px;
   background-color: #fff;
@@ -55,13 +62,35 @@
   font-family: Helvetica, Arial, sans-serif;
 }
 
+.modal-header {
+  position: relative;
+}
+
 .modal-header h3 {
   margin-top: 0;
   color: #42b983;
+  font-size: 35px;
+}
+
+.modal-header i {
+  position: absolute;
+  top: 0;
+  right: 0;
+  font-size: 30px;
+  cursor: pointer;
 }
 
 .modal-body {
+  width: 100%;
   margin: 20px 0;
+  font-weight: 900;
+  font-size: 25px;
+  text-decoration: underline;
+}
+
+.modal-footer {
+  font-style: italic;
+  font-weight: 700;
 }
 
 .modal-default-button {

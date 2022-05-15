@@ -2,7 +2,7 @@
   <div>
     <transition-group name="list" tag="ul">
       <li
-        v-for="(todoItem, index) in this.storedTodoItems"
+        v-for="(todoItem, index) in this.todoItems"
         v-bind:key="todoItem.item"
         class="shadow"
       >
@@ -30,7 +30,7 @@ export default {
   methods: {
     // 암묵적으로 인자를 넘긴다.
     ...mapMutations({
-      removeTodo: 'removeOneItem',
+      removeTodo: 'removeOneItem', // removeOneItem({ todoItem, index })
       toggleComplete: 'toggleOneItem'
     })
 
@@ -46,7 +46,13 @@ export default {
     //   return this.$store.getters.storedTodoItems;
     // }
 
-    ...mapGetters(['storedTodoItems'])
+    // (컴포넌트 메서드명: store의 뮤테이션 명)이 서로 같을 때 축약형
+    // ...mapGetters(['storedTodoItems'])
+
+    // (컴포넌트 메서드명: store의 뮤테이션 명)이 서로 다를 때 이렇게 사용한다.
+    ...mapGetters({
+      todoItems: 'storedTodoItems'
+    })
   }
 }
 </script>

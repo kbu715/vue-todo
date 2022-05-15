@@ -8,7 +8,6 @@ const storage = {
         }
       }
     }
-    console.log(arr)
     return arr
   },
 }

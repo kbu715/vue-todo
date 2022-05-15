@@ -9,6 +9,7 @@
       you can use custom content here to overwrite
       default content
     -->
+      <!-- Modal의 slot 영역을 다시 정의하는 것 -->
       <h3 slot="header">
         경고!
         <i
@@ -17,8 +18,8 @@
           @click="showModal = false"
         ></i>
       </h3>
-      <div slot="body">무언가를 입력하세요!</div>
-      <footer slot="footer">copy right</footer>
+      <div slot="body">아무것도 입력하지 않았습니다.</div>
+      <footer slot="footer">{{new Date().getFullYear()}} All rights reserved.</footer>
     </Modal>
   </div>
 </template>

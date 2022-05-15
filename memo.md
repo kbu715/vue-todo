@@ -1,3 +1,46 @@
+# Vue
+
+## Vue Conditional Options
+
+- Conditional Rendering (Using `v-if`)
+- Conditional Display (Using `v-show`)
+
+## ES6
+
+- function statement
+```javascript
+function sum(a, b) {
+  return a + b;
+}
+```
+
+- function expression
+```javascript
+
+const sum = function (a, b) {
+  return a + b;
+}
+
+```
+
+## Flux란?
+
+- `MVC패턴`의 복잡한 데이터 흐름 문제를 해결하는 개발 패턴 - `Unidirectional data flow`
+
+`<Action>` -> `<Dispatcher>` -> `<Model>` -> `<View>`
+
+- 뷰단에서 다시 액션 발생 가능
+`<View>` -> `<Dispatcher>`
+
+1. `action`: 화면에서 발생하는 이벤트 또는 사용자의 입력
+2. `dispatcher`: 데이터를 변경하는 방법, 메서드
+3. `model`: 화면에 표시할 데이터
+4. `view`: 사용자에게 비춰지는 화면
+
+## Vuex 구조
+
+컴포넌트 -> 비동기 로직 -> 동기 로직 -> 상태
+`View components` ---(Dispatch)--- `Actions` ---(Commit)--- `Mutations` ---(Mutate)--- `State` ---(Render)---`View Components`
 ## Vuex 기술 요소
 
 - state: 여러 컴포넌트에 공유되는 데이터 data
@@ -134,7 +177,7 @@ actions: {
 }
 
 // App.vue
-this.$store.dispatch('delayDoubleNumber');
+this.$store.dispatch('delayDoubleNumber'); // action을 발동시킴 => dispatch
 ```
 
 #### actions 비동기 코드 예제 1
