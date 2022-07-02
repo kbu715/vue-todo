@@ -2,7 +2,7 @@
   <div>
     <transition-group name="list" tag="ul">
       <li
-        v-for="(todoItem, index) in this.todoItems"
+        v-for="(todoItem, index) in todoItems"
         v-bind:key="todoItem.item"
         class="shadow"
       >
